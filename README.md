@@ -14,6 +14,25 @@ A beautiful, responsive GitHub Pages site featuring a centered poem display, Spo
 
 Visit the site at: `https://watermarkhu.github.io/stijnhouweling/`
 
+## Deployment
+
+The site automatically deploys to GitHub Pages when changes are pushed to the `main` branch using GitHub Actions.
+
+### Automatic Deployment
+
+The `.github/workflows/deploy.yml` workflow:
+- Triggers on every push to the `main` branch
+- Can also be manually triggered from the Actions tab
+- Builds and deploys the site to GitHub Pages
+- Uses the latest GitHub Actions for Pages deployment
+
+### Manual Deployment
+
+You can also manually trigger a deployment:
+1. Go to the **Actions** tab in the repository
+2. Select the **Deploy to GitHub Pages** workflow
+3. Click **Run workflow** and select the `main` branch
+
 ## Customization
 
 ### Change the Poem
