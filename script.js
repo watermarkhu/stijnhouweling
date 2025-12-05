@@ -15,6 +15,7 @@ class Slideshow {
         this.currentSlideIndex = 0;
         this.images = [];
         this.transitionEffects = [...TRANSITION_EFFECTS];
+        this.intervalId = null;
         this.init();
     }
 
@@ -103,14 +104,24 @@ class Slideshow {
     start() {
         if (this.images.length <= 1) return;
         
-        setInterval(() => {
+        this.intervalId = setInterval(() => {
             this.nextSlide();
         }, SLIDESHOW_INTERVAL);
     }
 
+    stop() {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+        }
+    }
+
     nextSlide() {
+        // Get the current slide before moving forward
+        const previousSlideIndex = this.currentSlideIndex;
+        
         // Remove active class from current slide
-        this.slides[this.currentSlideIndex].classList.remove('active');
+        this.slides[previousSlideIndex].classList.remove('active');
 
         // Calculate next slide index
         this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
@@ -118,15 +129,15 @@ class Slideshow {
         // Add active class to next slide
         this.slides[this.currentSlideIndex].classList.add('active');
 
-        // Update background image for the slide that just became inactive
-        const inactiveSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
+        // Preload the next image into the slide that just became inactive
+        // This creates a smooth two-buffer system for efficient image cycling
         const nextImageIndex = (this.currentSlideIndex + 1) % this.images.length;
         const nextImageUrl = this.images[nextImageIndex];
 
         if (nextImageUrl.startsWith('linear-gradient')) {
-            this.slides[inactiveSlideIndex].style.background = nextImageUrl;
+            this.slides[previousSlideIndex].style.background = nextImageUrl;
         } else {
-            this.slides[inactiveSlideIndex].style.backgroundImage = `url('${nextImageUrl}')`;
+            this.slides[previousSlideIndex].style.backgroundImage = `url('${nextImageUrl}')`;
         }
 
         // Assign new random transition effect for variety
@@ -136,11 +147,11 @@ class Slideshow {
         
         // Remove all transition classes
         TRANSITION_EFFECTS.forEach(effect => {
-            this.slides[inactiveSlideIndex].classList.remove(effect);
+            this.slides[previousSlideIndex].classList.remove(effect);
         });
         
         // Add new random transition
-        this.slides[inactiveSlideIndex].classList.add(randomEffect);
+        this.slides[previousSlideIndex].classList.add(randomEffect);
     }
 }
 
