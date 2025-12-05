@@ -197,7 +197,11 @@ class PoemLoader {
     constructor() {
         this.poemContainer = document.querySelector('.poem-text');
         this.titleElement = document.querySelector('.poem-title');
-        this.init();
+        
+        // Only initialize if elements exist
+        if (this.poemContainer && this.titleElement) {
+            this.init();
+        }
     }
 
     async init() {
@@ -240,16 +244,18 @@ class PoemLoader {
                 continue;
             }
             
-            // Handle regular lines (remove trailing double spaces for line breaks)
+            // Handle regular lines (remove trailing double spaces for markdown line breaks)
             let processedLine = line.replace(/\s\s$/, '');
             htmlContent += `<p>${processedLine}</p>\n`;
         }
         
-        // Update the DOM
-        if (title) {
+        // Update the DOM only if elements exist
+        if (title && this.titleElement) {
             this.titleElement.textContent = title;
         }
-        this.poemContainer.innerHTML = htmlContent;
+        if (htmlContent && this.poemContainer) {
+            this.poemContainer.innerHTML = htmlContent;
+        }
     }
 }
 
