@@ -1,0 +1,2 @@
+# No exclusions needed - this is intentionally empty
+# The upload-pages-artifact action automatically excludes .git and other system files
