@@ -167,37 +167,7 @@ class Slideshow {
     }
 }
 
-// Spotify Integration
-class SpotifyPlayer {
-    constructor() {
-        this.container = document.querySelector('.spotify-container');
-        this.playerElement = document.getElementById('spotify-player');
-        this.trackId = this.container.dataset.spotifyTrackId || '3n3Ppam7vgaVa1iaRUc9Lp';
-        this.init();
-    }
 
-    init() {
-        // Use Spotify embed iframe (simpler than Web Playback SDK which requires authentication)
-        this.embedPlayer();
-    }
-
-    embedPlayer() {
-        // Create Spotify embed iframe
-        const iframe = document.createElement('iframe');
-        iframe.style.borderRadius = '12px';
-        iframe.src = `https://open.spotify.com/embed/track/${this.trackId}?utm_source=generator&theme=0`;
-        iframe.width = '100%';
-        iframe.height = '152';
-        iframe.frameBorder = '0';
-        iframe.allowFullscreen = '';
-        iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-        iframe.loading = 'lazy';
-
-        // Replace placeholder with iframe
-        this.playerElement.innerHTML = '';
-        this.playerElement.appendChild(iframe);
-    }
-}
 
 // Markdown Poem Loader
 class PoemLoader {
@@ -271,9 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize slideshow
     const slideshow = new Slideshow();
 
-    // Initialize Spotify player
-    const spotifyPlayer = new SpotifyPlayer();
-    
+
     // Load poem from markdown
     const poemLoader = new PoemLoader();
 });
