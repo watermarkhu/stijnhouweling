@@ -165,7 +165,7 @@ body {
 
 /* Poem Container */
 .poem-container {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
     padding: 3rem;
     border-radius: 20px;
@@ -208,7 +208,7 @@ body {
 
 /* Spotify Container */
 .spotify-container {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
     padding: 2rem;
     border-radius: 20px;
