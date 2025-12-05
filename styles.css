@@ -1,0 +1,298 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Slideshow Background */
+#slideshow-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Transition Effects Classes */
+.slide.fade-transition {
+    transition: opacity 2s ease-in-out;
+}
+
+.slide.scale-transition {
+    transition: opacity 2s ease-in-out, transform 3s ease-in-out;
+}
+
+.slide.scale-transition.active {
+    transform: scale(1.15);
+}
+
+.slide.blur-transition {
+    transition: opacity 2s ease-in-out, filter 2s ease-in-out;
+}
+
+.slide.blur-transition:not(.active) {
+    filter: blur(20px);
+}
+
+.slide.zoom-transition {
+    transition: opacity 2s ease-in-out, transform 3s ease-in-out;
+    transform: scale(1.3);
+}
+
+.slide.zoom-transition.active {
+    transform: scale(1);
+}
+
+.slide.slide-transition {
+    transition: opacity 2s ease-in-out, transform 3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.slide.slide-transition:not(.active) {
+    transform: translateX(100%);
+}
+
+/* New Extravagant Transitions */
+.slide.rotate-transition {
+    transition: opacity 2s ease-in-out, transform 3s ease-in-out;
+    transform: rotate(0deg) scale(1);
+}
+
+.slide.rotate-transition.active {
+    transform: rotate(5deg) scale(1.1);
+}
+
+.slide.flip-transition {
+    transition: opacity 2s ease-in-out, transform 3s ease-in-out;
+    transform: perspective(1000px) rotateY(90deg);
+}
+
+.slide.flip-transition.active {
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+.slide.ken-burns-transition {
+    transition: opacity 2s ease-in-out, transform 8s linear;
+    transform: scale(1) translate(0, 0);
+}
+
+.slide.ken-burns-transition.active {
+    transform: scale(1.2) translate(-5%, -5%);
+}
+
+.slide.spiral-transition {
+    transition: opacity 2s ease-in-out, transform 3s cubic-bezier(0.68, -0.55, 0.265, 1.55), filter 2s ease-in-out;
+    transform: rotate(-180deg) scale(0.5);
+    filter: blur(10px);
+}
+
+.slide.spiral-transition.active {
+    transform: rotate(0deg) scale(1.1);
+    filter: blur(0px);
+}
+
+.slide.wave-transition {
+    transition: opacity 2s ease-in-out, transform 3s ease-in-out;
+    transform: translateY(-100%) scale(0.8);
+}
+
+.slide.wave-transition.active {
+    transform: translateY(0) scale(1.05);
+}
+
+/* Fallback gradient background if no images */
+#slideshow-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    z-index: -2;
+}
+
+/* Overlay for better text readability */
+#slideshow-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+/* Content Container */
+.content-container {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: 3rem;
+}
+
+/* Poem Container */
+.poem-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.poem-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.poem-text {
+    font-size: 1.2rem;
+    line-height: 2;
+    color: #555;
+    font-style: italic;
+}
+
+.poem-text p {
+    margin: 0.5rem 0;
+}
+
+/* Spotify Container */
+.spotify-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+    animation: fadeInUp 1s ease-out 0.3s backwards;
+}
+
+#spotify-player {
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spotify-placeholder {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Spotify Embed Iframe Styles */
+#spotify-player iframe {
+    border-radius: 12px;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content-container {
+        padding: 1rem;
+        gap: 2rem;
+    }
+
+    .poem-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .poem-title {
+        font-size: 2rem;
+    }
+
+    .poem-text {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .spotify-container {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .poem-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .poem-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .poem-text {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .spotify-container {
+        padding: 1rem;
+    }
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.spotify-placeholder {
+    animation: pulse 2s ease-in-out infinite;
+}
