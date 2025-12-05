@@ -5,7 +5,12 @@ const TRANSITION_EFFECTS = [
     'scale-transition',
     'blur-transition',
     'zoom-transition',
-    'slide-transition'
+    'slide-transition',
+    'rotate-transition',
+    'flip-transition',
+    'ken-burns-transition',
+    'spiral-transition',
+    'wave-transition'
 ];
 
 // Slideshow functionality
@@ -187,6 +192,67 @@ class SpotifyPlayer {
     }
 }
 
+// Markdown Poem Loader
+class PoemLoader {
+    constructor() {
+        this.poemContainer = document.querySelector('.poem-text');
+        this.titleElement = document.querySelector('.poem-title');
+        this.init();
+    }
+
+    async init() {
+        await this.loadPoem();
+    }
+
+    async loadPoem() {
+        try {
+            const response = await fetch('poem.md');
+            if (response.ok) {
+                const markdown = await response.text();
+                this.renderMarkdown(markdown);
+            }
+        } catch (error) {
+            console.log('Using default poem content');
+            // Keep the default HTML content if poem.md cannot be loaded
+        }
+    }
+
+    renderMarkdown(markdown) {
+        // Simple markdown parser for poem content
+        const lines = markdown.split('\n');
+        let htmlContent = '';
+        let title = '';
+        
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            
+            // Handle title (# Title)
+            if (line.startsWith('# ')) {
+                title = line.substring(2);
+                continue;
+            }
+            
+            // Skip empty lines but add breaks
+            if (line === '') {
+                if (i > 0 && lines[i - 1].trim() !== '') {
+                    htmlContent += '<br>\n';
+                }
+                continue;
+            }
+            
+            // Handle regular lines (remove trailing double spaces for line breaks)
+            let processedLine = line.replace(/\s\s$/, '');
+            htmlContent += `<p>${processedLine}</p>\n`;
+        }
+        
+        // Update the DOM
+        if (title) {
+            this.titleElement.textContent = title;
+        }
+        this.poemContainer.innerHTML = htmlContent;
+    }
+}
+
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize slideshow
@@ -194,4 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Spotify player
     const spotifyPlayer = new SpotifyPlayer();
+    
+    // Load poem from markdown
+    const poemLoader = new PoemLoader();
 });

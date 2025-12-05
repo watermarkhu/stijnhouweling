@@ -18,7 +18,28 @@ Visit the site at: `https://watermarkhu.github.io/stijnhouweling/`
 
 ### Change the Poem
 
-Edit the poem content in `index.html` within the `.poem-text` div:
+**Method 1: Using Markdown (Recommended)**
+
+Edit the `poem.md` file to write your poem in markdown format:
+
+```markdown
+# Your Poem Title
+
+First line of your poem,  
+Second line of your poem,  
+Third line of your poem,  
+Fourth line of your poem.
+
+Next stanza here,  
+With more lines,  
+And so on.
+```
+
+**Note:** Use two trailing spaces at the end of a line for a line break within a stanza, or leave a blank line to create a stanza break.
+
+**Method 2: Direct HTML Editing**
+
+Alternatively, edit the poem content directly in `index.html` within the `.poem-text` div:
 
 ```html
 <div class="poem-text">
@@ -52,9 +73,11 @@ To find a Spotify track ID:
 ## Slideshow Features
 
 The background slideshow includes:
-- **Random Transitions**: Each slide uses a random effect (fade, scale, blur, zoom, slide)
+- **10 Extravagant Transitions**: Each slide uses a random effect including:
+  - Fade, scale, blur, zoom, slide
+  - Rotate, flip, Ken Burns, spiral, wave
 - **Auto-advance**: Slides change every 5 seconds
-- **Smooth Animations**: Professional CSS transitions
+- **Smooth Animations**: Professional CSS transitions with cubic bezier easing
 - **Fallback Gradients**: Beautiful gradients if no images are present
 
 ## File Structure
@@ -64,6 +87,7 @@ stijnhouweling/
 ├── index.html          # Main HTML page
 ├── styles.css          # Stylesheet with responsive design
 ├── script.js           # JavaScript for slideshow and Spotify
+├── poem.md             # Markdown file for poem content (edit this!)
 ├── pictures/           # Directory for slideshow images
 │   └── README.md       # Instructions for adding images
 ├── _config.yml         # GitHub Pages configuration
